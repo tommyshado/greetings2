@@ -2,27 +2,38 @@ function greetingsApp(countResult) {
     let counter = countResult || 0;
     let userName = {};
     let msg = '';
+    let currentName = '';
     // update user name
     function updateUser(name) {
         if (userName[name] !== undefined) {
             userName[name] += 1;
+            currentName = name;
         } else {
             userName[name] = 1;
             counter += 1;
         }
     }
-    // greet user in three languages
-    function greetUserName(user, lang) {
-        if (user && lang === 'IsiXhosa') {
-            msg = `Molo ${user}.`;
-            return msg;
-        } 
-        if (user && lang === 'SiSotho') {
-            msg = `Dumela ${user}.`;
+
+    function greetedNames() {
+        msg = '';
+        if (userName[currentName] >= 2) {
+            msg = `${currentName} has already been greeted.`;
             return msg;
         }
-        if (user && lang === 'English') {
-            msg = `Hello ${user}.`;
+    }
+    // greet user in three languages
+    function greetUserName(user, lang) {
+        let lowerCaseName = user.toLowerCase();
+        if (lowerCaseName && lang === 'IsiXhosa') {
+            msg = `Molo ${lowerCaseName}.`;
+            return msg;
+        } 
+        if (lowerCaseName && lang === 'SiSotho') {
+            msg = `Dumela ${lowerCaseName}.`;
+            return msg;
+        }
+        if (lowerCaseName && lang === 'English') {
+            msg = `Hello ${lowerCaseName}.`;
             return msg;
         }
     }
@@ -30,7 +41,7 @@ function greetingsApp(countResult) {
     function errorMessages(user, lang) {
         msg = '';
         if (user === '' && lang === null) {
-            msg = 'Please enter name and check language.';
+            msg = 'Please enter name and select language.';
             return msg;
         } 
         if (user === '') {
@@ -38,12 +49,7 @@ function greetingsApp(countResult) {
             return msg;
         }
         if (lang === null) {
-            msg = 'Please check a language.';
-            return msg;
-        }
-        
-        if (userName[user] >= 2) {
-            msg = `${user} has already been greeted.`;
+            msg = 'Please select a language.';
             return msg;
         }
         return '';
@@ -68,6 +74,7 @@ function greetingsApp(countResult) {
         errorMessages,
         greetingsCount,
         reset,
-        nameOfUser
+        nameOfUser,
+        greetedNames
     }
 }
