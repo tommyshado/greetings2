@@ -41,6 +41,7 @@ function greetingsApp(countResult) {
             msg = 'Please check a language.';
             return msg;
         }
+        
         if (userName[user] >= 2) {
             msg = `${user} has already been greeted.`;
             return msg;
