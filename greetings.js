@@ -16,7 +16,7 @@ if (localStorage['counter']) {
 greetBtnRef.addEventListener('click', function() {
     const radioReferenceBtn = document.querySelector('.language:checked');
 
-    if (radioReferenceBtn) {
+    if (radioReferenceBtn && nameReference.value !== '') {
         greet.innerHTML = greetApp.greetUserName(nameReference.value, radioReferenceBtn.value);
         greet.classList.add('display');
         greetApp.updateUser(nameReference.value);
@@ -25,7 +25,7 @@ greetBtnRef.addEventListener('click', function() {
 
     errorMessage.innerHTML = greetApp.errorMessages(nameReference.value, radioReferenceBtn);
     errorMessage.classList.add('danger');
-
+    localStorage['counter'] = greetApp.greetingsCount();
     localStorage.setItem('greetedNames', JSON.stringify(greetApp.nameOfUser()));
 
     setTimeout(function() {
@@ -38,5 +38,8 @@ greetBtnRef.addEventListener('click', function() {
 resetBtn.addEventListener('click', function() {
     countOfGreet.innerHTML = greetApp.reset();
     greet.innerHTML = '';
+    greet.classList.remove('display');
     errorMessage.innerHTML = '';
+    localStorage.clear();
+    location.reload();
 });
