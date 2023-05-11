@@ -1,7 +1,6 @@
 function greetingsApp(countResult) {
     let counter = countResult || 0;
     let userName = {};
-    let msg = '';
     let currentName = '';
     // update user name
     function updateUser(name) {
@@ -13,44 +12,42 @@ function greetingsApp(countResult) {
             counter += 1;
         }
     }
-
-    function greetedNames() {
-        msg = '';
-        if (userName[currentName] >= 2) {
-            msg = `${currentName} has already been greeted.`;
-            return msg;
-        }
-    }
     // greet user in three languages
     function greetUserName(user, lang) {
+        let pattern = /^[a-zA-Z0-9]+$/;
+        if (!user.match(pattern)) {
+            notValidName = 'Please enter valid name'
+        }
+
         let lowerCaseName = user.toLowerCase();
         if (lowerCaseName && lang === 'IsiXhosa') {
-            msg = `Molo ${lowerCaseName}.`;
-            return msg;
+            return`Molo ${lowerCaseName}.`;
         } 
         if (lowerCaseName && lang === 'SiSotho') {
-            msg = `Dumela ${lowerCaseName}.`;
-            return msg;
+            return `Dumela ${lowerCaseName}.`;
         }
         if (lowerCaseName && lang === 'English') {
-            msg = `Hello ${lowerCaseName}.`;
-            return msg;
+            return `Hello ${lowerCaseName}.`;
         }
+        return '';
     }
     
     function errorMessages(user, lang) {
-        msg = '';
         if (user === '' && lang === null) {
-            msg = 'Please enter name and select language.';
-            return msg;
+            return  'Please enter name and select language.';
         } 
         if (user === '') {
-            msg = 'Please enter name.';
-            return msg;
+            return 'Please enter name.';
         }
         if (lang === null) {
-            msg = 'Please select a language.';
-            return msg;
+            return  'Please select a language.';
+        }
+        return '';
+    }
+    
+    function greetedNames() {
+        if (userName[currentName] >= 2) {
+            return `${currentName} has already been greeted.`;
         }
         return '';
     }
