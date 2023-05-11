@@ -40,13 +40,6 @@ describe("The 'greetingsApp' factory function", function() {
     describe('greets a name once', function() {
         it('should be able to greet a user name once', function() {
             let greet = greetingsApp();
-                greet.updateUser('tom');
-                greet.updateUser('tom');
-
-            assert.equal(greet.greetedNames(), "tom has already been greeted.")
-        });
-        it('should be able to greet a user name once', function() {
-            let greet = greetingsApp();
                 greet.updateUser('kat');
                 greet.updateUser('kat');
 
@@ -58,6 +51,15 @@ describe("The 'greetingsApp' factory function", function() {
                 greet.updateUser('malebo');
 
             assert.equal(greet.greetedNames(), "malebo has already been greeted.")
+        });
+        it('should be able to greet a user name once', function() {
+            let greet = greetingsApp();
+                greet.updateUser('tim');
+                greet.updateUser('tim');
+                greet.updateUser('tim');
+                greet.updateUser('tim');
+
+            assert.equal(greet.greetedNames(), "tim has already been greeted.")
         });
     });
 })
