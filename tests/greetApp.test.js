@@ -62,4 +62,26 @@ describe("The 'greetingsApp' factory function", function() {
             assert.equal(greet.greetedNames(), "tim has already been greeted.")
         });
     });
+    describe('continue counting from the number in the local storage when local storage is not cleared', () => {
+        it('should be able to counting starting at the value in the local storage', () => {
+            let greetingsInstance = greetingsApp(2);
+                greetingsInstance.updateUser('tom');
+
+            assert.equal(greetingsInstance.greetingsCount(), 3)
+        })
+
+        it('should be able to counting starting at the value in the local storage', () => {
+            let greetingsInstance = greetingsApp(5);
+                greetingsInstance.updateUser('tom');
+
+            assert.equal(greetingsInstance.greetingsCount(), 6)
+        })
+
+        it('should be able to counting starting at the value in the local storage', () => {
+            let greetingsInstance = greetingsApp(1);
+                greetingsInstance.updateUser('landa');
+
+            assert.equal(greetingsInstance.greetingsCount(), 2)
+        })
+    })
 })
