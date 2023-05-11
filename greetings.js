@@ -27,6 +27,10 @@ greetBtnRef.addEventListener('click', function() {
             errorMessage.classList.add('danger');
             greet.innerHTML = '';
             greet.classList.remove('display');
+
+            setTimeout(function() {
+                errorMessage.style.display = 'none';
+            }, 3000);
         }
         countOfGreet.innerHTML = greetApp.greetingsCount();
     } else {
