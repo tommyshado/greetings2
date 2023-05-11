@@ -9,30 +9,37 @@ var countResult = 0;
 const greetApp = greetingsApp(countResult);
 
 if (localStorage['counter']) {
-    countResult = Number(localStorage['counter']);
+    countResult = JSON.parse(localStorage['counter']);
     countOfGreet.innerHTML = countResult;
 }
 
 greetBtnRef.addEventListener('click', function() {
-    const radioReferenceBtn = document.querySelector('.language:checked');
+    const radioReferenceBtn = document.querySelector('input[name="lang"]:checked');
+    const name = nameReference.value; 
 
-    if (radioReferenceBtn && nameReference.value !== '') {
-        greet.innerHTML = greetApp.greetUserName(nameReference.value, radioReferenceBtn.value);
+    if (radioReferenceBtn && name !== '') {
+        greet.innerHTML = greetApp.greetUserName(name, radioReferenceBtn.value);
         greet.classList.add('display');
-        greetApp.updateUser(nameReference.value);
+        nameReference.value = '';
+        greetApp.updateUser(name);
+        if (errorMessage.innerHTML = greetApp.greetedNames()) {
+            errorMessage.classList.add('danger');
+            greet.innerHTML = '';
+            greet.classList.remove('display');
+        }
         countOfGreet.innerHTML = greetApp.greetingsCount();
+    } else {
+        // error messages
+        errorMessage.innerHTML = greetApp.errorMessages(name, radioReferenceBtn); 
+        errorMessage.classList.add('danger');
+    
+        setTimeout(function() {
+            errorMessage.style.display = 'none';
+        }, 3000);
     }
-
-    errorMessage.innerHTML = greetApp.errorMessages(nameReference.value, radioReferenceBtn);
-    errorMessage.classList.add('danger');
-    localStorage['counter'] = greetApp.greetingsCount();
+    // local storage
+    localStorage.setItem('counter', greetApp.greetingsCount());
     localStorage.setItem('greetedNames', JSON.stringify(greetApp.nameOfUser()));
-
-    setTimeout(function() {
-        errorMessage.style.display = 'none';
-    }, 3000);
-
-    nameReference.value = '';
 });
 
 resetBtn.addEventListener('click', function() {
@@ -40,6 +47,7 @@ resetBtn.addEventListener('click', function() {
     greet.innerHTML = '';
     greet.classList.remove('display');
     errorMessage.innerHTML = '';
+    // // local storage
     localStorage.clear();
     location.reload();
 });
