@@ -4,6 +4,7 @@ const greet = document.querySelector('#greet');
 const countOfGreet = document.querySelector('#counter');
 const resetBtn = document.querySelector('.resetBtn');
 const errorMessage = document.querySelector('#errorMsg');
+const radioReferenceBtn = document.querySelectorAll('input[name="lang"]:checked');
 var countResult = 0;
 
 const greetApp = greetingsApp(countResult);
@@ -43,6 +44,9 @@ greetBtnRef.addEventListener('click', function() {
 });
 
 resetBtn.addEventListener('click', function() {
+    for (let i = 0; i < radioReferenceBtn.length; i++) {
+        radioReferenceBtn[i].checked = false;
+    }
     countOfGreet.innerHTML = greetApp.reset();
     greet.innerHTML = '';
     greet.classList.remove('display');
