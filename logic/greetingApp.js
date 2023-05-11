@@ -16,7 +16,7 @@ function greetingsApp(countResult) {
     function greetUserName(user, lang) {
         let pattern = /^[a-zA-Z0-9]+$/;
         if (!user.match(pattern)) {
-            notValidName = 'Please enter valid name'
+            return 'Please enter valid name';
         }
 
         let lowerCaseName = user.toLowerCase();
