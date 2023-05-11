@@ -45,6 +45,7 @@ greetBtnRef.addEventListener('click', function() {
     // local storage
     localStorage.setItem('counter', greetApp.greetingsCount());
     localStorage.setItem('greetedNames', JSON.stringify(greetApp.nameOfUser()));
+    radioReferenceBtn.checked = false;
 });
 
 resetBtn.addEventListener('click', function() {
