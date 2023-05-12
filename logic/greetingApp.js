@@ -4,7 +4,7 @@ function greetingsApp(countResult) {
     let currentName = '';
     // update user name
     function updateUser(name) {
-        let lowCaseName = name.toLowerCase().trim();
+        let lowCaseName = name.toLowerCase();
         if (userName[lowCaseName] !== undefined) {
             userName[lowCaseName] += 1;
             currentName = lowCaseName;
@@ -16,12 +16,12 @@ function greetingsApp(countResult) {
     // greet user in three languages
     function greetUserName(user, lang) {
         let pattern = /^[a-zA-Z0-9]+$/;
-        if (!user.match(pattern)) {
+        if (!user.trim().match(pattern)) {
             userName[user] = 0;
             return 'Please enter valid name';
         }
 
-        let lowerCaseName = user.toLowerCase().trim();
+        let lowerCaseName = user.toLowerCase();
         if (lowerCaseName && lang === 'IsiXhosa') {
             return`Molo ${lowerCaseName}.`;
         } 
