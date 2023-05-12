@@ -15,7 +15,7 @@ function greetingsApp(countResult) {
     }
     // greet user in three languages
     function greetUserName(user, lang) {
-        let pattern = /^[a-zA-Z0-9]+$/;
+        let pattern = /^[a-zA-Z]+$/;
         if (!user.trim().match(pattern)) {
             userName[user] = 0;
             return 'Please enter valid name';
