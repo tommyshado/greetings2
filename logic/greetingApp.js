@@ -4,9 +4,10 @@ function greetingsApp(countResult) {
     let currentName = '';
     // update user name
     function updateUser(name) {
-        if (userName[name] !== undefined) {
-            userName[name] += 1;
-            currentName = name;
+        let lowCaseName = name.toLowerCase();
+        if (userName[lowCaseName] !== undefined) {
+            userName[lowCaseName] += 1;
+            currentName = lowCaseName;
         } else {
             userName[name] = 1;
             counter += 1;
