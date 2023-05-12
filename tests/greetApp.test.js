@@ -55,9 +55,9 @@ describe("The 'greetingsApp' factory function", function() {
         it('should be able to greet a user name once', function() {
             let greet = greetingsApp();
                 greet.updateUser('tim');
-                greet.updateUser('tim');
-                greet.updateUser('tim');
-                greet.updateUser('tim');
+                greet.updateUser('TiM');
+                greet.updateUser('tiM');
+                greet.updateUser('Tim');
 
             assert.equal(greet.greetedNames(), "tim has already been greeted.")
         });
