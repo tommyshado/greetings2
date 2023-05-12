@@ -34,6 +34,8 @@ greetBtnRef.addEventListener('click', function() {
         }
         countOfGreet.innerHTML = greetApp.greetingsCount();
     } else {
+        // 
+        errorMessage.style.display = 'block';
         // error messages
         errorMessage.innerHTML = greetApp.errorMessages(name, radioReferenceBtn); 
         errorMessage.classList.add('danger');
@@ -45,7 +47,9 @@ greetBtnRef.addEventListener('click', function() {
     // local storage
     localStorage.setItem('counter', greetApp.greetingsCount());
     localStorage.setItem('greetedNames', JSON.stringify(greetApp.nameOfUser()));
-    radioReferenceBtn.checked = false;
+    if (radioReferenceBtn){
+        radioReferenceBtn.checked = false;
+    }
 });
 
 resetBtn.addEventListener('click', function() {
