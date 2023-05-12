@@ -9,7 +9,7 @@ function greetingsApp(countResult) {
             userName[lowCaseName] += 1;
             currentName = lowCaseName;
         } else {
-            userName[name] = 1;
+            userName[lowCaseName] = 1;
             counter += 1;
         }
     }
