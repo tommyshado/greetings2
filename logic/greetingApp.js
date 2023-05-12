@@ -17,6 +17,7 @@ function greetingsApp(countResult) {
     function greetUserName(user, lang) {
         let pattern = /^[a-zA-Z0-9]+$/;
         if (!user.match(pattern)) {
+            userName[user] = 0;
             return 'Please enter valid name';
         }
 
