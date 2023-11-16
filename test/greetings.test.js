@@ -1,87 +1,82 @@
 describe("The 'greetingsApp' factory function", function() {
-    describe('handles uppercase', function() {
-        it('should be able to greet a user when they enter name and checks a button', function() {
-            let greet = greetingsApp();
-            
-            assert.equal(greet.greetUserName('Tom', "IsiXhosa"), 'Molo tom.');
-        });
-        it('should be able to greet a user when they enter name and checks a button', function() {
-            let greet = greetingsApp();
-            
-            assert.equal(greet.greetUserName('MthunZi', "English"), 'Hello mthunzi.');
-        });
-        it('should be able to greet a user when they enter name and checks a button', function() {
-            let greet = greetingsApp();
-            
-            assert.equal(greet.greetUserName('MtHuNzi', "SiSotho"), 'Dumela mthunzi.');
-        });
+    let App;
+
+    beforeEach(() => {
+        App = greetingsApp();
     });
 
-    describe('error messages', function() {
-        it('should be able to tell a user to enter name', function() {
-            let greet = greetingsApp();
-
-            assert.equal(greet.errorMessages('', 'IsiXhosa'), 'Please enter name.');
+    it("should be able to get the greeted usernames", () => {
+        App.greetUser({
+            username: "mthunzi",
+            greet: "Molo"
+        });
+        App.greetUser({
+            username: "tom",
+            greet: "Hello"
+        });
+        App.greetUser({
+            username: "mthunzi",
+            greet: "Dumela"
         });
 
-        it('should be able to tell a user to enter name and select a language', function() {
-            let greet = greetingsApp();
-
-            assert.equal(greet.errorMessages('', null), 'Please enter name and select language.');
-        });
-
-        it('should be able to tell a user to select a language', function() {
-            let greet = greetingsApp();
-
-            assert.equal(greet.errorMessages('Mthunzi', null), 'Please select a language.');
-        });
+        assert.deepEqual({
+            "mthunzi": 2,
+            "tom": 1,
+        }, App.getUsers());
     });
 
-    describe('greets a name once', function() {
-        it('should be able to greet a user name once', function() {
-            let greet = greetingsApp();
-                greet.updateUser('kat');
-                greet.updateUser('kat');
-
-            assert.equal(greet.greetedNames(), "kat has already been greeted.")
+    it("should be able to greet a username in Xhosa", () => {
+        const greeting = App.greetUser({
+            username: "mthunzi",
+            greet: "Molo"
         });
-        it('should be able to greet a user name once', function() {
-            let greet = greetingsApp();
-                greet.updateUser('malebo');
-                greet.updateUser('malebo');
 
-            assert.equal(greet.greetedNames(), "malebo has already been greeted.")
-        });
-        it('should be able to greet a user name once', function() {
-            let greet = greetingsApp();
-                greet.updateUser('tim');
-                greet.updateUser('TiM');
-                greet.updateUser('tiM');
-                greet.updateUser('Tim');
-
-            assert.equal(greet.greetedNames(), "tim has already been greeted.")
-        });
+        assert.equal("Molo mthunzi", greeting);
     });
-    describe('continue counting from the number in the local storage when local storage is not cleared', () => {
-        it('should be able to counting starting at the value in the local storage', () => {
-            let greetingsInstance = greetingsApp(2);
-                greetingsInstance.updateUser('tom');
 
-            assert.equal(greetingsInstance.greetingsCount(), 3)
-        })
+    it("should be able to greet a username in English", () => {
+        const greeting = App.greetUser({
+            username: "Katlego",
+            greet: "Hello"
+        });
 
-        it('should be able to counting starting at the value in the local storage', () => {
-            let greetingsInstance = greetingsApp(5);
-                greetingsInstance.updateUser('tom');
+        assert.equal("Hello mthunzi", greeting);
+    });
 
-            assert.equal(greetingsInstance.greetingsCount(), 6)
-        })
+    it("should not be able to greet a greeted username", () => {
+        const greeting = App.greetUser({
+            username: "bjorn",
+            greet: "Dumela"
+        });
 
-        it('should be able to counting starting at the value in the local storage', () => {
-            let greetingsInstance = greetingsApp(1);
-                greetingsInstance.updateUser('landa');
+        assert.equal("Molo mthunzi", greeting);
 
-            assert.equal(greetingsInstance.greetingsCount(), 2)
-        })
-    })
+        const greeting__ = App.greetUser({
+            username: "bjorn",
+            greet: "Molo"
+        });
+
+        assert.equal(false, greeting__);
+    });
+    
+    it("should be able to get the count of greeted usernames", () => {
+        App.greetUser({
+            username: "Katlego",
+            greet: "Hello"
+        });
+        App.greetUser({
+            username: "bjorn",
+            greet: "Dumela"
+        });
+        App.greetUser({
+            username: "Katlego",
+            greet: "Dumela"
+        });
+        App.greetUser({
+            username: "bjorn",
+            greet: "Molo"
+        });
+
+        assert.equal(2, App.getCount());
+    });
 })
