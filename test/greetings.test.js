@@ -40,7 +40,7 @@ describe("The 'greetingsApp' factory function", function() {
             greet: "Hello"
         });
 
-        assert.equal("Hello mthunzi", greeting);
+        assert.equal("Hello Katlego", greeting);
     });
 
     it("should not be able to greet a greeted username", () => {
@@ -49,7 +49,7 @@ describe("The 'greetingsApp' factory function", function() {
             greet: "Dumela"
         });
 
-        assert.equal("Molo mthunzi", greeting);
+        assert.equal("Dumela bjorn", greeting);
 
         const greeting__ = App.greetUser({
             username: "bjorn",
